@@ -1,11 +1,4 @@
-SELECT 
-    wt.WageType, 
-    COALESCE(cwt.Text, pwt.Text) AS ConceptText
-FROM 
-    PY_WageTypesByCompaniesTexts cwt
-LEFT JOIN 
-    PY_WageTypesTexts pwt ON cwt.WageType = pwt.WageType AND pwt.Country = ?  -- Código del país
-WHERE 
-    cwt.Company = ?  -- Código de la compañía
-ORDER BY 
-    wt.WageType;
+
+-- 3- Obtener la lista de conceptos con sus códigos y textos ordenados por código de concepto. 
+-- Considerar que los textos pueden estar definidos a nivel país y/o a nivel de compañía tomando como prioridad los de la compañía.
+

@@ -1,10 +1,15 @@
+--2 Obtener el monto promedio del concepto 1000 del colaborador del año 2022.
+
 SELECT 
-    AVG(pd.Amount) AS AverageAmount
+    AVG(pd.Amount) AS Promedio
 FROM 
     PY_PayRunDetail pd
-JOIN 
-    PY_PayRun py ON pd.PayRun = py.PayRun AND pd.Company = py.Company
+JOIN PY_PayRun py 
+
+ON pd.PayRun = py.PayRun
+AND pd.Company = py.Company
+
 WHERE 
-    pd.Employee = ?  -- Código del colaborador
-    AND pd.WageType = '1000'  -- Concepto 1000
-    AND py.Year = 2022;  -- Año 2022
+    pd.Employee = 383
+    AND pd.WageType = '1000' 
+    AND py.Year = 2022;

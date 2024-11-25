@@ -1,18 +1,12 @@
-SELECT 
-    Company,
-    Employee,
-    PayRun,
-    Year,
-    Period,
-    DateBeg,
-    DateEnd,
-    PayDate,
-    NetPayment
+-- 1- Obtener la última nómina regular del colaborador.
+
+SELECT *
 FROM 
     PY_PayRun
 WHERE 
-    Employee = ? -- Código del colaborador
-    AND Period != '00'  -- Aseguramos que es una nómina regular
+    Employee = 383
 ORDER BY 
     PayRun DESC
 LIMIT 1;
+
+
