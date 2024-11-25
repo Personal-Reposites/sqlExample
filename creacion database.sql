@@ -9,9 +9,9 @@ USE company_db;
 
 
 CREATE TABLE IF NOT EXISTS PY_PayRun (
+    PayRun INT UNSIGNED NOT NULL AUTO_INCREMENT,
     Company CHAR(5) NOT NULL,
     Employee INT UNSIGNED NOT NULL,
-    PayRun INT UNSIGNED NOT NULL AUTO_INCREMENT,
     Year INT UNSIGNED NOT NULL,
     Period CHAR(2) NOT NULL,
     DateBeg DATE NOT NULL,
@@ -21,8 +21,10 @@ CREATE TABLE IF NOT EXISTS PY_PayRun (
     NetPayment DECIMAL(14, 2) NOT NULL,
     User CHAR(10) NOT NULL,
     TimeStamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (Company, Employee, PayRun)
+    PRIMARY KEY (PayRun), -- PayRun debe ser clave primaria
+    UNIQUE KEY (Company, Employee, Year, Period) -- Opcional, para evitar duplicados en combinación
 );
+
 
 CREATE TABLE IF NOT EXISTS PY_PayRunDetail (
     Company CHAR(5) NOT NULL,
@@ -31,8 +33,9 @@ CREATE TABLE IF NOT EXISTS PY_PayRunDetail (
     WageType CHAR(4) NOT NULL,
     Amount DECIMAL(14, 2) NOT NULL,
     PRIMARY KEY (Company, Employee, PayRun, WageType),
-    FOREIGN KEY (Company, Employee, PayRun) REFERENCES PY_PayRun (Company, Employee, PayRun)
+    FOREIGN KEY (PayRun) REFERENCES PY_PayRun (PayRun) -- Ajustar clave foránea si es necesario
 );
+
 
 CREATE TABLE IF NOT EXISTS HR_Employees (
     Company CHAR(5) NOT NULL,
@@ -58,7 +61,6 @@ CREATE TABLE IF NOT EXISTS PY_WageTypesTexts (
     Text CHAR(50) NOT NULL,
     PRIMARY KEY (Country, WageType, Language)
 );
-
 
 
 ////////////////////////////////////
